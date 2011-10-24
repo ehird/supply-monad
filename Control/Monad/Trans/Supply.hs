@@ -24,7 +24,7 @@ newtype SupplyT s m a = SupplyT { unwrapSupplyT :: StateT (SupplyT s m s) m a }
 type Supply s = SupplyT s Identity
 
 instance (Monad m) => Functor (SupplyT s m) where
-  fmap f (SupplyT m) = SupplyT (liftM f m)
+  fmap = liftM
 
 instance (Monad m) => Applicative (SupplyT s m) where
   pure = return
