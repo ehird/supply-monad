@@ -32,7 +32,7 @@ instance (Monad m) => Applicative (SupplyT s m) where
 
 instance (Monad m) => Monad (SupplyT s m) where
   return = SupplyT . return
-  SupplyT m >>= f = SupplyT (m >>= unwrapSupplyT . f)
+  SupplyT m >>= f = SupplyT $ m >>= unwrapSupplyT . f
   fail = SupplyT . fail
 
 instance MonadTrans (SupplyT s) where
