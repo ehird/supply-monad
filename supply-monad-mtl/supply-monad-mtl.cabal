@@ -1,0 +1,31 @@
+name:          supply-monad-mtl
+version:       0.1
+synopsis:      mtl integration for the supply-monad package.
+description:
+  This package provides a MonadSupply typeclass on top of the
+  @supply-monad@ package, plus SupplyT instances for standard mtl
+  classes.
+license:       BSD3
+license-file:  LICENSE
+author:        Elliott Hird
+maintainer:    Elliott Hird <penguinofthegods@gmail.com>
+homepage:      https://github.com/ehird/supply-monad
+category:      Control
+build-type:    Simple
+cabal-version: >= 1.10
+
+source-repository head
+  type: git
+  location: https://github.com/ehird/supply-monad.git
+
+library
+  default-language: Haskell2010
+  exposed-modules:
+    Control.Monad.Supply,
+    Control.Monad.Supply.Class
+  build-depends:
+    base == 4.*,
+    transformers == 0.2.*,
+    mtl == 2.*,
+    supply-monad == 0.1.*
+  ghc-options: -Wall -fno-warn-orphans
