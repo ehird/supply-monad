@@ -19,7 +19,6 @@ import Control.Monad.Trans.State
 -- | A monad for giving computations a supply of arbitrary values;
 -- potential sources for these values include an action in the
 -- transformed monad and a list.
-
 newtype SupplyT s m a = SupplyT { unwrapSupplyT :: StateT (SupplyT s m s) m a }
 
 type Supply s = SupplyT s Identity
