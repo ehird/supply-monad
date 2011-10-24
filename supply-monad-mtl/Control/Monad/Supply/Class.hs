@@ -11,6 +11,7 @@ module Control.Monad.Supply.Class
 
 import Data.Monoid
 import Control.Monad.Trans
+import qualified Control.Monad.Trans.Supply as Supply
 import qualified Control.Monad.Trans.Cont as Cont
 import qualified Control.Monad.Trans.Error as Error
 import qualified Control.Monad.Trans.Identity as Identity
@@ -29,6 +30,9 @@ class (Monad m) => MonadSupply s m | m -> s where
 
 instance (MonadSupply s m) => MonadSupply s (Cont.ContT r m) where
   supply = lift supply
+
+instance (Monad m) => MonadSupply s (Supply.SupplyT s m) where
+  supply = Supply.supply
 
 instance (MonadSupply s m, Error.Error e) => MonadSupply s (Error.ErrorT e m) where
   supply = lift supply
