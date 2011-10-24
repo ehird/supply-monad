@@ -5,6 +5,7 @@ module Control.Monad.Trans.Supply
   , runSupplyT
   , runSupplyTAction
   , runSupplyTList
+  , runSupply
   , runSupplyList
     -- * Example
     -- $example
@@ -68,6 +69,10 @@ runSupplyTList :: (Monad m) => SupplyT s m a -> [s] -> m a
 runSupplyTList m = runSupplyT m . prov
   where prov [] = fail "runSupplyTList: out of supply"
         prov (x:xs) = SupplyT $ put (prov xs) >> return x
+
+-- | See 'runSupplyT'.
+runSupply :: Supply s a -> Supply s s -> a
+runSupply m = runIdentity . runSupplyT m
 
 -- | See 'runSupplyTList'.
 runSupplyList :: Supply s a -> [s] -> a
